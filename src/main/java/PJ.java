@@ -1,9 +1,11 @@
+package main.java;
+
 public class PJ extends Cliente {
     private String cnpj;
     private String razaoSocial;
     
     public PJ(String cnpjP , String razaoSocialP, String emailP, String contatoP, String logradouroP, int numeroP, String bairroP, String cidadeP,String estadoP) {
-        super(emailP, contatoP, logradouroP, numeroP, bairroP, cidadeP, estadoP);
+        super(emailP, contatoP, logradouroP, numeroP, bairroP, cidadeP, estadoP,cnpjP);
 		this.cnpj = cnpjP;
 		this.razaoSocial = razaoSocialP;
 

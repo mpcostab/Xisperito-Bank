@@ -1,3 +1,5 @@
+package main.java;
+
 public class PF extends Cliente {
 
 	private String nome;

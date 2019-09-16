@@ -1,3 +1,5 @@
+package main.java;
+
 public class Cliente {
 
 	private String email;

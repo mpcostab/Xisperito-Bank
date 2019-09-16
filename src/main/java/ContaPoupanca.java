@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 
 public class ContaPoupanca extends Conta{
@@ -5,6 +7,7 @@ public class ContaPoupanca extends Conta{
 	private static ArrayList<String> cpfExistentes = new ArrayList<>();
 	
 	public ContaPoupanca(PF pfP){
+		super(pfP);
 		this.cpfExistentes.add(pfP.getCpf());	
 	}
 	

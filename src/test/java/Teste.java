@@ -1,9 +1,6 @@
-import org.junit.jupiter.api.Test;
+package test.java;
 
-public class Teste {
+public class Teste{
+    
 
-    @Test
-    public static void testeEndereco(){
-        Endereco endereco = new Endereco("",12,"","","");
-    }
 }
