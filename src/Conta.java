@@ -1,4 +1,9 @@
+import java.util.Scanner;
+
 public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
+	
+	Scanner leia = new Scanner(System.in);
+	
 	protected double saldo; //COM PRIVATE O ATRIBUTO NÃO PODE SER LIDO NEM MODIFICADO POR NINGUÉM A NÃO SER PELA PRÓPRIA CLASSE.
 	private int agencia;
 	private int numero;
@@ -20,7 +25,47 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 	
 	public abstract void deposita(double valor);
 	
-	public boolean saca(double valor) {
+	public boolean saca(Cliente c1, double valor) {
+		System.out.print("Pessoa fisica ou Pessoa juridica (pf/pj): ");
+		String conta = leia.nextLine();
+		switch (conta) {
+		case "pf":
+			System.out.print("Digite seu cpf: ");
+			String novocpf = leia.nextLine();
+			if (novocpf == ((PF) c1).getCpf()) {
+				if (this.saldo >= valor) {
+					this.saldo -= valor;
+					return true;
+				}
+				else {
+					System.out.println("Saldo Insuficiente");
+					return false;
+				}
+			}
+			else {
+				System.out.println("CPF invalido!");
+				return false;
+			}
+		case "pj":
+			System.out.print("Digite seu cnpj: ");
+			String novocnpj = leia.nextLine();
+			if (novocnpj == ((PJ) c1).getCnpj()) {
+				if (this.saldo >= valor) {
+					this.saldo -= valor;
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				System.out.println("CNPJ invalido!");
+				return false;
+			}
+		}
+		
+		
+		
 		if (this.saldo >= valor) {
 			this.saldo -= valor;
 			return true;
@@ -64,4 +109,3 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 		return Conta.total;
 	}
 }
-	
