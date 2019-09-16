@@ -1,7 +1,20 @@
+import java.util.ArrayList;
 
 public class ContaPoupanca extends Conta{
-	ContaPoupanca(int agencia, int numero){
-		super(agencia, numero);
+	private PF pf;
+	private static ArrayList<String> cpfExistentes = new ArrayList<>();
+	
+	public ContaPoupanca(PF pfP){
+		this.cpfExistentes.add(pfP.getCpf());	
+	}
+	
+	public boolean verificacaoConta(PF pfP) { 
+		for(int cont = 0; cont <cpfExistentes.size(); cont++) {
+			if(pfP.getCpf() == cpfExistentes.get(cont)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override

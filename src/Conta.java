@@ -9,11 +9,11 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 		
 	//}
 	 //Construtores não se herdam mas a filha pode chamar pelo super
-	public Conta(int agencia, int numero) { //Esse é o construtor específico
+	public Conta() { //Esse é o construtor específico
 		Conta.total++; //pode escrever só total, mas escrevemos com Conta pra enfatizar que é algo da classe e não do objeto.
 		System.out.println("O total de contas já abertas é "+ total);
-		this.agencia = agencia;
-		this.numero = numero;
+		this.agencia = 0;
+		this.numero = 12;
 		//this.saldo = 100;
 		System.out.println("Estou criando uma conta "+ this.agencia);
 	}
