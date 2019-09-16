@@ -3,10 +3,16 @@ public class Cliente {
 
 	private String email;
     private String contato;
-    private Endereco enderco;
+    private Endereco endereco;
     
-    public Cliente(String emailP,String contatoP, String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP) {
-    	this.enderco = new Endereco(logradouroP,  numeroP,  bairroP, cidadeP, estadoP);
+    public Cliente(String emailP,String contatoP, String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP,String cnpjOuCpf) {
+    	if(!Cnpj.isCNPJ(cnpjOuCpf)){
+
+        }
+    	else if (!Cpf.isCPF(cnpjOuCpf)) {
+
+        }
+    	this.endereco = new Endereco(logradouroP,  numeroP,  bairroP, cidadeP, estadoP);
     	this.email = emailP;
     	this.contato = contatoP;
     }
@@ -26,16 +32,16 @@ public class Cliente {
         this.email = email;
     }
     
-    public Endereco getEnderco() {
-		return enderco;
+    public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setEnderco(Endereco enderco) {
-		this.enderco = enderco;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	@Override
 	public String toString() {
-		return "Cliente [email=" + email + ", contato=" + contato + ", enderco=" + enderco.toString() + "]";
+		return "Cliente [email=" + email + ", contato=" + contato + ", enderco=" + endereco.toString() + "]";
 	}
 }
