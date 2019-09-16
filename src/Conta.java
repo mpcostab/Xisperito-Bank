@@ -1,23 +1,26 @@
-public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
+public abstract class Conta{ //Nï¿½o posso instanciar objetos de classes abstradas
 	private double saldo;
 	private int agencia;
 	private int numero;
 	private Cliente titular;
-	private static int total; //STATIC DEFINE QUE O ATRIBUTO TOTAL É DA CLASSE E NÃO DE CADA OBJETO!
+	private static int total; //STATIC DEFINE QUE O ATRIBUTO TOTAL Ã‰ DA CLASSE E NÃƒO DE CADA OBJETO!
 	
-	//public Conta() { //Construtor padrão que as filhas vão herdar através do super()
+	//public Conta() { //Construtor padrÃ£o que as filhas vÃ£o herdar atravÃ©s do super()
 		
 	//}
-	 //Construtores não se herdam mas a filha pode chamar pelo super
-	public Conta(int agencia, int numero) { //Esse é o construtor específico
-		Conta.total++; //pode escrever só total, mas escrevemos com Conta pra enfatizar que é algo da classe e não do objeto.
-		System.out.println("O total de contas já abertas é "+ total);
-		this.agencia = agencia;
-		this.numero = numero;
-		//this.saldo = 100;
+	 //Construtores nÃ£o se herdam mas a filha pode chamar pelo super
+	public Conta(Cliente cliente) { //Esse Ã© o construtor especÃ­fico
+
+		Conta.total++; //pode escrever sÃ³ total, mas escrevemos com Conta pra enfatizar que Ã© algo da classe e nÃ£o do objeto.
+		System.out.println("O total de contas jÃ¡ abertas Ã© "+ total);
+		Random rand = new Random();
+		this.agencia = rand.nextInt(5)+1;
+		this.numero = rand.nextInt(999999);
+		this.titular = cliente;
+		this.saldo = 0;
 		System.out.println("Estou criando uma conta "+ this.agencia);
 	}
-	
+
 	public abstract void deposita(double valor);
 	
 	public boolean saca(double valor) {
@@ -30,10 +33,9 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 	}
 
 	public abstract boolean transfere(double valor, Conta destino);
-
-
-	public double getSaldo() {
-		return this.saldo;
+	
+	public String getSaldo() {
+		return "R$ "+String.format("%.2f", saldo)+ " " + getTitular().toString();
 	}
 
 	public void setSaldo(double saldo) {
@@ -43,31 +45,15 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 	public int getNumero() {
 		return this.numero;
 	}
-	public void setNumero(int numero) { //Quando você encapsula, você pode fazer validações dentro. E quando as pessoas forem usar, elas alteram só em um lugar: na classe.
-		if (numero <= 0) {
-			System.out.println("Número de conta inválido.");
-			return;
-		}
-		this.numero = numero;
-	}
 	public int getAgencia() {
 		return this.agencia;
 	}
-	public void setAgencia(int agencia) {
-		if (agencia <= 0) {
-			System.out.println("Número de agência inválido");
-			return;
-		}
-		this.agencia = agencia;
-	}
-	public void setTitular(Cliente titular) {
-		this.titular = titular;
-	}
+
 	public Cliente getTitular() {
 		return this.titular;
 	}
 	public static int getTotal() {
-		//Dentro do contexto estático não existe this: System.out.println(this.saldo)
+		//Dentro do contexto estÃ¡tico nÃ£o existe this: System.out.println(this.saldo)
 		return Conta.total;
 	}
 }
