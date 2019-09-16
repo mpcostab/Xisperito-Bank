@@ -23,7 +23,47 @@ public abstract class Conta{ //N�o posso instanciar objetos de classes abstrad
 
 	public abstract void deposita(double valor);
 	
-	public boolean saca(double valor) {
+	public boolean saca(Cliente c1, double valor) {
+		System.out.print("Pessoa fisica ou Pessoa juridica (pf/pj): ");
+		String conta = leia.nextLine();
+		switch (conta) {
+		case "pf":
+			System.out.print("Digite seu cpf: ");
+			String novocpf = leia.nextLine();
+			if (novocpf == ((PF) c1).getCpf()) {
+				if (this.saldo >= valor) {
+					this.saldo -= valor;
+					return true;
+				}
+				else {
+					System.out.println("Saldo Insuficiente");
+					return false;
+				}
+			}
+			else {
+				System.out.println("CPF invalido!");
+				return false;
+			}
+		case "pj":
+			System.out.print("Digite seu cnpj: ");
+			String novocnpj = leia.nextLine();
+			if (novocnpj == ((PJ) c1).getCnpj()) {
+				if (this.saldo >= valor) {
+					this.saldo -= valor;
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				System.out.println("CNPJ invalido!");
+				return false;
+			}
+		}
+		
+		
+		
 		if (this.saldo >= valor) {
 			this.saldo -= valor;
 			return true;
@@ -57,4 +97,3 @@ public abstract class Conta{ //N�o posso instanciar objetos de classes abstrad
 		return Conta.total;
 	}
 }
-	
