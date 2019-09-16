@@ -2,7 +2,7 @@
 public class TesteContas {
 	public static void main(String[] args) {
 		PF pf1 = new PF("Rodrigo", "123456","12345678910", "rodiro.prates", "912345678", "Almeda Rio Negro",500,"Alphavile","Barueri","SP");
-		System.out.println(pf1.toString());
+		PF pf2 = new PF("Rodrigo", "123456","12345678918", "rodiro.prates", "912345678", "Almeda Rio Negro",500,"Alphavile","Barueri","SP");
 		
 		ContaCorrente cc = new ContaCorrente(pf1);
 		cc.deposita(100.0);

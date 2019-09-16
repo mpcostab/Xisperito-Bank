@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 //new ContaCorrente()
-public class ContaCorrente extends Conta{ //Herda os atributos e herda os mÈtodos, mas n„o os Construtores!!!!!
+public class ContaCorrente extends Conta{ //Herda os atributos e herda os m√©todos, mas n√£o os Construtores!!!!!
+	int tamanho;
 	
 	public ContaCorrente(Cliente cliente){
-		super(cliente); //Chama o construtor padr„o da classe m„e que È sem os parametros, ou o especÌfico que È com os parametros
+		super(cliente); //Chama o construtor padr√£o da classe m√£e que √© sem os parametros, ou o espec√≠fico que √© com os parametros
 	}
 	
 	@Override
