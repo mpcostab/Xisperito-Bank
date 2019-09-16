@@ -1,8 +1,8 @@
 //new ContaCorrente()
 public class ContaCorrente extends Conta{ //Herda os atributos e herda os métodos, mas não os Construtores!!!!!
 	
-	public ContaCorrente(int agencia, int numero){
-		super(agencia, numero); //Chama o construtor padrão da classe mãe que é sem os parametros, ou o específico que é com os parametros
+	public ContaCorrente(Cliente cliente){
+		super(cliente); //Chama o construtor padrão da classe mãe que é sem os parametros, ou o específico que é com os parametros
 	}
 	
 	@Override

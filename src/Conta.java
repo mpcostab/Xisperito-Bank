@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 	protected double saldo; //COM PRIVATE O ATRIBUTO NÃO PODE SER LIDO NEM MODIFICADO POR NINGUÉM A NÃO SER PELA PRÓPRIA CLASSE.
 	private int agencia;
@@ -9,15 +11,18 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 		
 	//}
 	 //Construtores não se herdam mas a filha pode chamar pelo super
-	public Conta(int agencia, int numero) { //Esse é o construtor específico
+	public Conta(Cliente cliente) { //Esse é o construtor específico
+
 		Conta.total++; //pode escrever só total, mas escrevemos com Conta pra enfatizar que é algo da classe e não do objeto.
 		System.out.println("O total de contas já abertas é "+ total);
-		this.agencia = agencia;
-		this.numero = numero;
-		//this.saldo = 100;
+		Random rand = new Random();
+		this.agencia = rand.nextInt(5)+1;
+		this.numero = rand.nextInt(999999);
+		this.titular = cliente;
+		this.saldo = 0;
 		System.out.println("Estou criando uma conta "+ this.agencia);
 	}
-	
+
 	public abstract void deposita(double valor);
 	
 	public boolean saca(double valor) {
@@ -30,32 +35,16 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
 	}
 	public abstract boolean transfere(double valor, Conta destino);
 	
-	public double getSaldo() {
-		return this.saldo;
+	public String getSaldo() {
+		return "R$ "+String.format("%.2f", saldo)+ " " + getTitular().toString();
 	}
 	public int getNumero() {
 		return this.numero;
 	}
-	public void setNumero(int numero) { //Quando você encapsula, você pode fazer validações dentro. E quando as pessoas forem usar, elas alteram só em um lugar: na classe.
-		if (numero <= 0) {
-			System.out.println("Número de conta inválido.");
-			return;
-		}
-		this.numero = numero;
-	}
 	public int getAgencia() {
 		return this.agencia;
 	}
-	public void setAgencia(int agencia) {
-		if (agencia <= 0) {
-			System.out.println("Número de agência inválido");
-			return;
-		}
-		this.agencia = agencia;
-	}
-	public void setTitular(Cliente titular) {
-		this.titular = titular;
-	}
+
 	public Cliente getTitular() {
 		return this.titular;
 	}
