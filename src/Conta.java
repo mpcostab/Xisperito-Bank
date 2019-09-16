@@ -1,7 +1,5 @@
-import java.util.Random;
-
-public abstract class Conta{ //Não posso instanciar objetos de classes abstradas
-	protected double saldo; //COM PRIVATE O ATRIBUTO NÃO PODE SER LIDO NEM MODIFICADO POR NINGUÉM A NÃO SER PELA PRÓPRIA CLASSE.
+public abstract class Conta{ //N�o posso instanciar objetos de classes abstradas
+	private double saldo;
 	private int agencia;
 	private int numero;
 	private Cliente titular;
@@ -33,11 +31,17 @@ public abstract class Conta{ //Não posso instanciar objetos de classes abstrada
 			return false;
 		}
 	}
+
 	public abstract boolean transfere(double valor, Conta destino);
 	
 	public String getSaldo() {
 		return "R$ "+String.format("%.2f", saldo)+ " " + getTitular().toString();
 	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
 	public int getNumero() {
 		return this.numero;
 	}
