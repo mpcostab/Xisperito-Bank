@@ -8,6 +8,7 @@ public abstract class Cpf {
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
     	 CPF = CPF.replace(".","");
          CPF = CPF.replace("-","");
+
          if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
                 CPF.equals("22222222222") || CPF.equals("33333333333") ||
@@ -66,7 +67,7 @@ public abstract class Cpf {
         CPF = CPF.replace(".","");
         CPF = CPF.replace("-","");
         if(!isCPF(CPF))
-            return"Não é um CPF";
+            return"Nï¿½o ï¿½ um CPF";
         return (CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
     }
