@@ -14,7 +14,7 @@ public class CpfT {
 
     @Test
     public void testeFormatacao(){
-        Assert.assertEquals("987.654.321-00",Cpf.imprimeCPF("987.654.321-00"));
+        Assert.assertEquals("987.654.321-00",Cpf.imprimeCPF("98765432100"));
     }
     @Test
     public void testeTextoCPF(){
