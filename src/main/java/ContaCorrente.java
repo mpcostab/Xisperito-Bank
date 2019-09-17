@@ -35,7 +35,7 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 			int ag = rand.nextInt((16 - 12) + 1) + 12;
 			super.setAgencia(getAgencia() + ag);
 			super.setNumero(rand.nextInt(999999));
-			this.saldo = 0;
+			this.saldo = 100;
 			return "Conta corrente feita com sucesso!\n+Conta: " + getNumero() + "\nAgencia: " + mostraAgencia();
 
 		} else {
@@ -52,7 +52,7 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 			int ag = rand.nextInt((16 - 12) + 1) + 12;
 			super.setAgencia(getAgencia() + ag);
 			super.setNumero(rand.nextInt(999999));
-			this.saldo = 0;
+			this.saldo = 100;
 			return "Conta corrente feita com sucesso!\n+Conta: " + getNumero() + "\nAgencia: " + mostraAgencia();
 		} else {
 			return "Voce possui uma conta corrente!";
@@ -86,7 +86,6 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 		} else {
 			return false;
 		}
-
 	}
 
 	public boolean sacarPF(String cpf, double valor, ContaPoupanca cp) {
@@ -96,9 +95,9 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 			if (this.saldo >= valor) {
 				this.saldo -= valor;
 				return true;
-			} else if (cp.verificacaoContaExistente(this.pf)) {
+			} else if (!cp.verificacaoContaExistenteCp (this.pf)) {
 				double devendo = this.saldo - valor;
-				this.saldo = 0;
+				saldo = 0;
 				cp.setSaldo(cp.getSaldo() + devendo);
 				return true;
 			} else {
@@ -126,6 +125,15 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 			return ("Titular: " + pf.getNome() + "\n" + this.imprimirSaldo() + "\n" + Cpf.imprimeCPF(pf.getCpf()));
 		} else {
 			return "Esse cpf n�o possui uma conta";
+		}
+	}
+
+	public boolean depositar(double valor, int notas){
+		if(valor > 1 && valor != 3 && 0 < notas && notas <= 20 && valor == (int) valor) {
+			this.saldo += valor;
+			return true;
+		}else{
+			return false;
 		}
 	}
 

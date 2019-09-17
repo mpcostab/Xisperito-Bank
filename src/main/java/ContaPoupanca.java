@@ -22,22 +22,22 @@ public class ContaPoupanca extends Conta {
 	}
 
 	public void criarConta(PF pfP) {
-		if (verificacaoContaExistente(pfP)) {
+		if (verificacaoContaExistenteCp(pfP)) {
 			this.cpfExistentes.add(pfP.getCpf());
 			this.pf = pfP;
 			Random rand = new Random();
 			super.setAgencia(rand.nextInt(5) + 1);
 			super.setNumero(rand.nextInt(999999));
-			this.saldo = 0;
+			this.saldo = 1000;
 			System.out.println("Conta corrente feita com sucesso!");
 		} else {
 			System.out.println("Voce possui uma conta corrente!");
 		}
 	}
 
-	public boolean verificacaoContaExistente(PF pfP) {
+	public boolean verificacaoContaExistenteCp(PF pfP) {
 		for (int cont = 0; cont < cpfExistentes.size(); cont++) {
-			if (pfP.getCpf() == cpfExistentes.get(cont)) {
+			if (pfP.getCpf() == cpfExistentes.get(cont) ) {
 				return false;
 			}
 		}
@@ -52,7 +52,16 @@ public class ContaPoupanca extends Conta {
 		} else {
 			return false;
 		}
-		
+
+	}
+
+	public boolean depositar(double valor, int notas){
+		if(valor > 1 && valor != 3 && 0 < notas && notas <= 20 && valor == (int) valor) {
+			this.saldo += valor;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
