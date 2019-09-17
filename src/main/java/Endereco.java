@@ -1,3 +1,5 @@
+package main.java;
+
 public class Endereco {
 
 	private String logradouro;
@@ -7,12 +9,30 @@ public class Endereco {
 	private String cidade;
 	private String estado;
 	
+	/**
+	 * 
+	 * @param logradouroP
+	 * @param numeroP
+	 * @param bairroP
+	 * @param cidadeP
+	 * @param estadoP
+	 */
+	
 	public Endereco(String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP) {
 		this.logradouro = logradouroP;
 		this.numero = numeroP;
 		this.bairro = bairroP;
 		this.cidade = cidadeP;
 		this.estado = estadoP;
+	}
+	
+	public Endereco(String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP, String complementoP) {
+		this.logradouro = logradouroP;
+		this.numero = numeroP;
+		this.bairro = bairroP;
+		this.cidade = cidadeP;
+		this.estado = estadoP;
+		this.complemento = complementoP;
 	}
 	
 	public String getLogradouro() {
@@ -61,15 +81,6 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public Endereco(String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP, String complementoP) {
-		this.logradouro = logradouroP;
-		this.numero = numeroP;
-		this.bairro = bairroP;
-		this.cidade = cidadeP;
-		this.estado = estadoP;
-		this.complemento = complementoP;
 	}
 	
 	
