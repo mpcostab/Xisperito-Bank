@@ -1,6 +1,6 @@
 package main.java;
 
-public class Cliente {
+public abstract class Cliente {
 
 	private String email;
     private String contato;
@@ -58,4 +58,25 @@ public class Cliente {
 
         return false;
     }
+    public static boolean validarRg(String rg){
+        rg =  rg.replace(".","");
+        rg = rg.replace("-","");
+        if(rg.matches("[0-9]+") && rg.length() == 9){
+            return true;}
+        return false;
+    }
+    public static boolean validarEmail(String email){
+        String str = email;
+        String auxiliar = email.replace("@","");
+        if(str.length() != auxiliar.length()+1){//Se entrar no if email não valido
+            return false;
+        }else{ // tem um @
+            str = email.substring(1,email.length()-1);
+            auxiliar = str.replace("@","");
+            if(auxiliar.length() == str.length())
+                return false;
+        }
+        return true;
+    }
+
 }

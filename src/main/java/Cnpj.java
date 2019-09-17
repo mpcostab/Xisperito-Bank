@@ -6,6 +6,9 @@ public class Cnpj {
 
     public static boolean isCNPJ(String CNPJ) {
 // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
+        CNPJ = CNPJ.replace(".","");
+        CNPJ = CNPJ.replace("-","");
+        CNPJ = CNPJ.replace("/","");
         if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") ||
                 CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333") ||
                 CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555") ||
@@ -65,8 +68,11 @@ public class Cnpj {
 
     public static String imprimeCNPJ(String CNPJ) {
 // máscara do CNPJ: 99.999.999.9999-99
+        if(!Cnpj.isCNPJ(CNPJ))
+            return "NAO E UM CNPJ!";
+
         return(CNPJ.substring(0, 2) + "." + CNPJ.substring(2, 5) + "." +
-                CNPJ.substring(5, 8) + "." + CNPJ.substring(8, 12) + "-" +
+                CNPJ.substring(5, 8) + "/" + CNPJ.substring(8, 12) + "-" +
                 CNPJ.substring(12, 14));
     }
 }

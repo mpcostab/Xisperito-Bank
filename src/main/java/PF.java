@@ -11,12 +11,16 @@ public class PF extends Cliente {
 
 		super(emailP, contatoP, logradouroP, numeroP, bairroP, cidadeP, estadoP,cpfP);
 		this.nome = nomeP;
-		this.rg = rgP;
-		if (Cpf.isCPF(cpfP)) {
+
+		if (Cpf.isCPF(cpfP)
+                && Cliente.validarContato(contatoP)
+                && Cliente.validarEmail(emailP)
+                && Cliente.validarRg(rgP)) {
 			this.cpf = cpfP;
+            this.rg = rgP;
 		}
 		else {
-			System.out.println("CPF Invalido!");
+			System.out.println("Nao foi possivel criar a conta");
 		}
 
 		// TODO Auto-generated constructor stub
