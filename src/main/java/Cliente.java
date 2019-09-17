@@ -5,14 +5,18 @@ public class Cliente {
 	private String email;
     private String contato;
     private Endereco endereco;
-    
+
+    /**
+     * 
+     * @param emailP
+     * @param contatoP
+     * @param logradouroP
+     * @param numeroP
+     * @param bairroP
+     * @param cidadeP
+     * @param estadoP
+     */
     public Cliente(String emailP,String contatoP, String logradouroP, int numeroP, String bairroP, String cidadeP, String estadoP,String cnpjOuCpf) {
-    	if(!Cnpj.isCNPJ(cnpjOuCpf)){
-
-        }
-    	else if (!Cpf.isCPF(cnpjOuCpf)) {
-
-        }
     	this.endereco = new Endereco(logradouroP,  numeroP,  bairroP, cidadeP, estadoP);
     	this.email = emailP;
     	this.contato = contatoP;
