@@ -12,7 +12,12 @@ public class PF extends Cliente {
 		super(emailP, contatoP, logradouroP, numeroP, bairroP, cidadeP, estadoP,cpfP);
 		this.nome = nomeP;
 		this.rg = rgP;
-		this.cpf = cpfP;
+		if (Cpf.isCPF(cpfP)) {
+			this.cpf = cpfP;
+		}
+		else {
+			System.out.println("CPF Invalido!");
+		}
 
 		// TODO Auto-generated constructor stub
 	}
@@ -54,9 +59,4 @@ public class PF extends Cliente {
     public void setContato(String contato) {
         super.setContato(contato);
     }
-    
-    @Override
-   	public String toString() {
-        return "Nome do titular: "+ this.nome + " CPF: "+Cpf.imprimeCPF(this.cpf);
-   	}
 }

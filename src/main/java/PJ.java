@@ -6,9 +6,13 @@ public class PJ extends Cliente {
     
     public PJ(String cnpjP , String razaoSocialP, String emailP, String contatoP, String logradouroP, int numeroP, String bairroP, String cidadeP,String estadoP) {
         super(emailP, contatoP, logradouroP, numeroP, bairroP, cidadeP, estadoP,cnpjP);
-		this.cnpj = cnpjP;
 		this.razaoSocial = razaoSocialP;
-
+		if(Cnpj.isCNPJ(cnpjP)) {
+			this.cnpj = cnpjP;
+			}
+		else {
+			System.out.println("CNPJ Invalido!");
+		}
 		// TODO Auto-generated constructor stub
 	}
 
