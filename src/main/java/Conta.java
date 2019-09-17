@@ -5,22 +5,15 @@ import main.java.Cliente;
 import java.util.Random;
 
 public abstract class Conta{ //N�o posso instanciar objetos de classes abstradas
-	private double saldo;
 	private int agencia;
 	private int numero;
-	
 
-	public String imprimirSaldo() {
-		return "R$"+this.getSaldo();
+	public String mostraAgencia(){
+		String str ="0000"+Integer.toString(getAgencia()/100)+"-"+Integer.toString(getAgencia()%100);
+		return str;
 	}
-
-	
-	public double getSaldo() {
-		return this.saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
+	public String mostraContaeAgencia(){
+		return getNumero()+"/"+mostraAgencia();
 	}
 
 	public int getNumero() {
@@ -39,11 +32,6 @@ public abstract class Conta{ //N�o posso instanciar objetos de classes abstrad
 		this.agencia = agencia;
 	}
 	
-	public abstract void deposita(double valor);
-
-	public abstract boolean transfere(double valor, Conta destino);
 	
-	public abstract boolean sacar(double valor);
-	
-	public abstract String consultarSaldo(PF pf); 
+	public abstract String consultarSaldoContaPF(String cpf); 
 }

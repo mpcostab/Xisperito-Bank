@@ -49,4 +49,13 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [email=" + email + ", contato=" + contato + ", enderco=" + endereco.toString() + "]";
 	}
+	
+	public static boolean validarContato(String contato){
+        if(contato.substring(0,1).equals("0"))
+           contato = contato.substring(1,contato.length());
+        if(contato.matches("[0-9]+") && contato.length() == 11)
+            return true;
+
+        return false;
+    }
 }

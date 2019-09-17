@@ -7,41 +7,59 @@ import java.util.ArrayList;
 import java.util.Random;
 
 //new ContaCorrente()
-public class ContaCorrente extends Conta { //Herda os atributos e herda os métodos, mas não os Construtores!!!!!
+public class ContaCorrente extends Conta { // Herda os atributos e herda os métodos, mas não os Construtores!!!!!
+
+
 	private static ArrayList<String> cpfExistentes = new ArrayList<>();
 	private static ArrayList<String> cnpjExistentes = new ArrayList<>();
+
+	private double saldo;
 	private PF pf;
 	private PJ pj;
-
-	/**
-	 * 
-	 * @param pfP
-	 */
-	public ContaCorrente(PF pfP) {
-		if (verificacaoConta(pfP)) {
-			this.cpfExistentes.add(pfP.getCpf());
-			this.pf = pfP;
-			System.out.println("Conta corrente feita com sucesso!");
-		} else {
-			System.out.println("Voce possui uma conta corrente!");
-		}
+	private boolean status = false;
+	
+	public PF getPf() {
+		return pf;
 	}
 
-	public ContaCorrente(PJ pjP) {
-		if (verificacaoConta(pjP)) {
-			this.cpfExistentes.add(pjP.getCnpj());
+	public String imprimirSaldo() {
+		return String.format("R$ %.2f", this.saldo);
+	}
+
+	public String criarConta(PJ pjP) {
+		if (verificacaoContaExistente(pjP) && Cnpj.isCNPJ(pjP.getCnpj())) {
+			this.cnpjExistentes.add(pjP.getCnpj());
 			this.pj = pjP;
 			Random rand = new Random();
-			super.setAgencia(rand.nextInt(5) + 1);
+			super.setAgencia(100 * (rand.nextInt(5) + 1));
+			int ag = rand.nextInt((16 - 12) + 1) + 12;
+			super.setAgencia(getAgencia() + ag);
 			super.setNumero(rand.nextInt(999999));
-			super.setSaldo(0);
-			System.out.println("Conta corrente feita com sucesso!");
+			this.saldo = 0;
+			return "Conta corrente feita com sucesso!\n+Conta: " + getNumero() + "\nAgencia: " + mostraAgencia();
+
 		} else {
-			System.out.println("Voce possui uma conta corrente!");
+			return "N�o foi possivel criar conta!";
 		}
 	}
 
-	public boolean verificacaoConta(PF pfP) {
+	public String criarConta(PF pfP) {
+		if (verificacaoContaExistente(pfP) && Cpf.isCPF(pfP.getCpf())) {
+			this.cpfExistentes.add(pfP.getCpf());
+			this.pf = pfP;
+			Random rand = new Random();
+			super.setAgencia(100 * (rand.nextInt(5) + 1));
+			int ag = rand.nextInt((16 - 12) + 1) + 12;
+			super.setAgencia(getAgencia() + ag);
+			super.setNumero(rand.nextInt(999999));
+			this.saldo = 0;
+			return "Conta corrente feita com sucesso!\n+Conta: " + getNumero() + "\nAgencia: " + mostraAgencia();
+		} else {
+			return "Voce possui uma conta corrente!";
+		}
+	}
+
+	public boolean verificacaoContaExistente(PF pfP) {
 		for (int cont = 0; cont < cpfExistentes.size(); cont++) {
 			if (pfP.getCpf() == cpfExistentes.get(cont)) {
 				return false;
@@ -50,7 +68,7 @@ public class ContaCorrente extends Conta { //Herda os atributos e herda os méto
 		return true;
 	}
 
-	public boolean verificacaoConta(PJ pjP) {
+	public boolean verificacaoContaExistente(PJ pjP) {
 		for (int cont = 0; cont < cpfExistentes.size(); cont++) {
 			if (pjP.getCnpj() == cpfExistentes.get(cont)) {
 				return false;
@@ -59,10 +77,43 @@ public class ContaCorrente extends Conta { //Herda os atributos e herda os méto
 		return true;
 	}
 
-	@Override
-	public boolean transfere(double valor, Conta destino) {
-		if (this.sacar(valor)) {
-			destino.deposita(valor);
+	public boolean sacarPF(String cpf, double valor) {
+		String valorTexto = Double.toString(valor);
+		if (cpf == this.pf.getCpf() && this.saldo >= valor && valor != 3 && valor > 2
+				&& "0".equals(valorTexto.substring(valorTexto.length() - 1, valorTexto.length()))) {
+			this.saldo -= valor;
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public boolean sacarPF(String cpf, double valor, ContaPoupanca cp) {
+		String valorTexto = Double.toString(valor);
+		if (cpf == this.pf.getCpf() && valor != 3 && valor > 2
+				&& "0".equals(valorTexto.substring(valorTexto.length() - 1, valorTexto.length()))) {
+			if (this.saldo >= valor) {
+				this.saldo -= valor;
+				return true;
+			} else if (cp.verificacaoContaExistente(this.pf)) {
+				double devendo = this.saldo - valor;
+				this.saldo = 0;
+				cp.setSaldo(cp.getSaldo() + devendo);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public boolean sacarPJ(String cnpj, double valor) {
+		String valorTexto = Double.toString(valor);
+		if (cnpj == this.pj.getCnpj() && this.saldo >= valor && valor != 3 && valor > 2
+				&& "0".equals(valorTexto.substring(valorTexto.length() - 1, valorTexto.length()))) {
+			this.saldo -= valor;
 			return true;
 		} else {
 			return false;
@@ -70,29 +121,18 @@ public class ContaCorrente extends Conta { //Herda os atributos e herda os méto
 	}
 
 	@Override
-	public void deposita(double valor) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean sacar(double valor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String consultarSaldo(PF pf) {
-		if (this.pf.getCpf() == pf.getCpf()) {
+	public String consultarSaldoContaPF(String cpf) {
+		if (this.pf.getCpf() == cpf) {
 			return ("Titular: " + pf.getNome() + "\n" + this.imprimirSaldo() + "\n" + Cpf.imprimeCPF(pf.getCpf()));
 		} else {
 			return "Esse cpf n�o possui uma conta";
 		}
 	}
-	
-	public String consultarSaldo(PJ pj) {
-		if (this.pf.getCpf() == pj.getCnpj()) {
-			return ("Titular: " + pj.getRazaoSocial() + "\n" + this.imprimirSaldo() + "\n" + Cnpj.imprimeCNPJ(pj.getCnpj()));
+
+	public String consultarSaldoContaPJ(String cnpj) {
+		if (this.pf.getCpf() == cnpj) {
+			return ("Titular: " + pj.getRazaoSocial() + "\n" + this.imprimirSaldo() + "\n"
+					+ Cnpj.imprimeCNPJ(pj.getCnpj()));
 		} else {
 			return "Esse cnpj n�o possui uma conta";
 		}
