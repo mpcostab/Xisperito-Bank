@@ -21,9 +21,13 @@ public class ContaCorrente extends Conta { //Herda os atributos e herda os méto
 		if (verificacaoConta(pfP)) {
 			this.cpfExistentes.add(pfP.getCpf());
 			this.pf = pfP;
-			System.out.println("Conta corrente feita com sucesso!");
+			Random rand = new Random();
+			super.setAgencia(rand.nextInt(5) + 1);
+			super.setNumero(rand.nextInt(999999));
+			super.setSaldo(0);
+			System.out.println("sucesso!");
 		} else {
-			System.out.println("Voce possui uma conta corrente!");
+			System.out.println("Deu RUIM");
 		}
 	}
 
@@ -35,9 +39,9 @@ public class ContaCorrente extends Conta { //Herda os atributos e herda os méto
 			super.setAgencia(rand.nextInt(5) + 1);
 			super.setNumero(rand.nextInt(999999));
 			super.setSaldo(0);
-			System.out.println("Conta corrente feita com sucesso!");
+			System.out.println("sucesso!");
 		} else {
-			System.out.println("Voce possui uma conta corrente!");
+			System.out.println("DEU RUIM!");
 		}
 	}
 

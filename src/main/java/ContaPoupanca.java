@@ -19,9 +19,9 @@ public class ContaPoupanca extends Conta{
 			super.setAgencia(rand.nextInt(5)+1);
 			super.setNumero(rand.nextInt(999999));
 			super.setSaldo(0);
-			System.out.println("Conta poupança feita com sucesso!");
+			System.out.println("Conta poupanca feita com sucesso!");
 		} else {
-			System.out.println("Você já possui uma conta poupança!");
+			System.out.println("Voce ja possui uma conta poupanca!");
 		}
 	}
 
@@ -56,7 +56,7 @@ public class ContaPoupanca extends Conta{
 		if (this.pf.getCpf() == pf.getCpf()) {
 			return ("Titular: " + pf.getNome() + "\n" + this.imprimirSaldo() + "\n" + Cpf.imprimeCPF(pf.getCpf()));
 		} else {
-			return "Esse cpf não possui uma conta";
+			return "Esse cpf nï¿½o possui uma conta";
 		}
 	}
 }
