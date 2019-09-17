@@ -27,7 +27,7 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 	}
 
 	public String criarConta(PJ pjP) {
-		if (verificacaoContaExistente(pjP) && Cnpj.isCNPJ(pjP.getCnpj())) {
+		if (!verificacaoContaExistente(pjP) && Cnpj.isCNPJ(pjP.getCnpj())) {
 			this.cnpjExistentes.add(pjP.getCnpj());
 			this.pj = pjP;
 			Random rand = new Random();
@@ -42,9 +42,8 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 			return "N�o foi possivel criar conta!";
 		}
 	}
-
 	public String criarConta(PF pfP) {
-		if (verificacaoContaExistente(pfP) && Cpf.isCPF(pfP.getCpf())) {
+		if (!verificacaoContaExistente(pfP) && Cpf.isCPF(pfP.getCpf())) {
 			this.cpfExistentes.add(pfP.getCpf());
 			this.pf = pfP;
 			Random rand = new Random();
@@ -62,19 +61,19 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os mét
 	public boolean verificacaoContaExistente(PF pfP) {
 		for (int cont = 0; cont < cpfExistentes.size(); cont++) {
 			if (pfP.getCpf() == cpfExistentes.get(cont)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean verificacaoContaExistente(PJ pjP) {
-		for (int cont = 0; cont < cpfExistentes.size(); cont++) {
-			if (pjP.getCnpj() == cpfExistentes.get(cont)) {
-				return false;
+		for (int cont = 0; cont < cnpjExistentes.size(); cont++) {
+			if (pjP.getCnpj() == cnpjExistentes.get(cont)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean sacarPF(String cpf, double valor) {

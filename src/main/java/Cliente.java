@@ -1,6 +1,6 @@
 package main.java;
 
-public class Cliente {
+public abstract class Cliente {
 
 	private String email;
     private String contato;
