@@ -17,7 +17,7 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os m√©t
 	private PF pf;
 	private PJ pj;
 	private boolean status = false;
-	
+
 	public PF getPf() {
 		return pf;
 	}
@@ -42,6 +42,7 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os m√©t
 			return "N„o foi possivel criar conta!";
 		}
 	}
+
 	public String criarConta(PF pfP) {
 		if (!verificacaoContaExistente(pfP) && Cpf.isCPF(pfP.getCpf())) {
 			this.cpfExistentes.add(pfP.getCpf());
@@ -136,4 +137,19 @@ public class ContaCorrente extends Conta { // Herda os atributos e herda os m√©t
 			return "Esse cnpj n„o possui uma conta";
 		}
 	}
+	/**
+	 * @param valor: valor a ser depositado n„o pode ser maior que 2000,00 menor que 2 nem o valor 3 e
+	 *                n„o pode valores quebrados
+	 * @param notas: quantidades de notas a serem depositadas n„o pode ser depositado 0 notas nem maior que vinte
+	 * @return: retornar· true se deu certo o deposito e false se deu errado o deposito
+	 */
+
+	public boolean deposita(double valor,int notas){
+		if(notas <= 20 && valor <= 20*100 && valor > 1 && valor != 3 && notas >0 && valor == (int)valor){
+			this.saldo =+ valor;
+			return true;
+		}
+		return false;
+	}
+
 }
